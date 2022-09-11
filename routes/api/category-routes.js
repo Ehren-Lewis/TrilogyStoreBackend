@@ -7,10 +7,12 @@ router.get('/', async (req, res) => {
   // find all categories
   // be sure to include its associated Products
   try {
-    //works if include isn't included
+
+    // works seeded
     const allCategoryData = await Category.findAll( { 
       include: [{ model: Product }],
     })
+
 
     if (!allCategoryData) {
     res.json("Sorry, there was an issue getting the categories");
@@ -30,16 +32,13 @@ router.get('/:id', async (req, res) => { // works
 
   try {
 
-    // works except for include product
+    // works seeded
     const singleCategoryData = await Category.findByPk(req.params.id, {
       include: [{ model: Product }],
     });
 
-    // console.log(singleCategoryData);
-    // console.log(typeof singleCategoryData);
 
-    if (singleCategoryData == "") {
-      console.log('in here')
+    if (singleCategoryData == null) {
     res.json("Sorry, there was an issue getting the category and products");
     return;
     }
@@ -54,7 +53,7 @@ router.get('/:id', async (req, res) => { // works
 router.post('/', async (req, res) => {
   // create a new category
 
-  // works
+  // works seeded
   try {
   const newCategory = await Category.create({
     category_name: req.body.category_name
@@ -75,7 +74,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
 
-  // works
+  // works seeded
   try {
   const currentCategory = await Category.findOne({
     where: {
@@ -102,9 +101,11 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => { 
   // delete a category by its `id` value
 
-  // works 
+  // works seeded
 
   try {
+
+
   const deleteCategory = await Category.destroy({
     where: {id: req.params.id}
   });

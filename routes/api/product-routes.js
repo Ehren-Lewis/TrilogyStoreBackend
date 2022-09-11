@@ -6,17 +6,37 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 router.get('/', async (req, res) => {
   //   // be sure to include its associated Category and Tag data
+  try {
+    const allProducts = await Product.findAll({
+      include: [{model: Category}, {model: Tag, through: ProductTag}]
+    });
 
-  Product.findAll({
-    include: [{model: Category}, {model: Tag}]
-  })
+    if (allProducts == null) {
+      res.json("There was an issue getting all of the products");
+      return;
+    }
+
+    res.json(allProducts);
+
+  } catch (err) {
+    res.json(err)
+  }
 
 });
 
 // get one product
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
+    try {
+
+      const singleProduct = await Product.findByPk( req.params.id, {
+        include: [{model: Category}, {model: Tag, through: ProductTag}]
+      })
+
+    } catch (err) {
+      res.json(err)
+    }
 });
 
 // create new product
@@ -93,8 +113,24 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
+
+  try {
+    const delTag = await Tag.destroy({
+      where: {id: req.params.id}
+    });
+
+    if (!delTag) {
+      res.json("There was an issue in deleting the tag");
+      return
+    }
+
+    res.json(delTag)
+  } catch (err) {
+    res.json(err);
+  }
+
 });
 
 module.exports = router;

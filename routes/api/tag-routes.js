@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
       include: [{model: Product, through: ProductTag}],
     });
 
-    if (allTags == "") {
+    if (allTags == null) {
       res.json("There was an issue getting the tags");
       return;
     }
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
       include: [{model: Tag, through: ProductTag}]
     });
 
-    if (currentTag == "" ) {
+    if (currentTag == null ) {
       res.json("There was an issue in getting the specified tag");
       return;
     }
@@ -41,8 +41,23 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res) => {  // not quite certain
   // create a new tag
+  try { 
+    const newTag = await Tag.create({
+      tag_name : req.body.tag_name
+    });
+
+
+    if (!newTag) {
+      res.json("There was an issue with creating the tag");
+    }
+
+    res.json(newTag);
+
+  } catch (err) {
+    res.json(err)
+  }
 });
 
 router.put('/:id', async (req, res) => {
@@ -51,7 +66,7 @@ router.put('/:id', async (req, res) => {
 
     const tagToUpdate = await Tag.findByPk( req.params.id);
 
-    tagToUpdate.update({ tag_name: req.body.tag_name });
+    tagToUpdate.update({ tag_name: req.body });
     tagToUpdate.save();
 
     res.send(tagToUpdate);
