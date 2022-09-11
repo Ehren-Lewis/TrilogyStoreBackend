@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   try {
     //works if include isn't included
     const allCategoryData = await Category.findAll( { 
-      // include: {model: Product}
+      include: [{ model: Product }],
     })
 
     if (!allCategoryData) {
@@ -37,7 +37,6 @@ router.get('/:id', async (req, res) => { // works
 
     // console.log(singleCategoryData);
     // console.log(typeof singleCategoryData);
-  console.log(singleCategoryData);
 
     if (singleCategoryData == "") {
       console.log('in here')
