@@ -8,3 +8,7 @@ router.use((req, res) => {
 });
 
 module.exports = router;
+
+// http://localhost:3000/api/categories'
+// http://localhost:3000/api/products'
+// http://localhost:3000/api/tags'
