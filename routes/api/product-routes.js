@@ -34,9 +34,18 @@ router.get('/:id', async (req, res) => {
         include: [{model: Category}, {model: Tag, through: ProductTag}]
       })
 
+      if (!singleProduct) {
+        res.json("There was an error getting the product");
+        return;
+      }
+
+      res.json(singleProduct);
+
     } catch (err) {
       res.json(err)
     }
+
+
 });
 
 // create new product
