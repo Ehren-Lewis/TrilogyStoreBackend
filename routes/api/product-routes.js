@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
       return;
     }
 
+
     res.json(allProducts);
 
   } catch (err) {
@@ -74,7 +75,7 @@ router.post('/', (req, res) => {
       res.status(200).json(product);
     })
     .then((productTagIds) => res.status(200).json(productTagIds))
-    .catch((err) => {
+    .catch((err) => { 
       console.log(err);
       res.status(400).json(err);
     });
