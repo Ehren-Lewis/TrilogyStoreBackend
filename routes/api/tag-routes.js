@@ -68,7 +68,7 @@ router.put('/:id', async (req, res) => {
 
     const tagToUpdate = await Tag.findByPk( req.params.id);
 
-    tagToUpdate.update({ tag_name: req.body });
+    tagToUpdate.update({ tag_name: req.body.tag_name });
     tagToUpdate.save();
 
     res.send(tagToUpdate);

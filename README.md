@@ -43,7 +43,7 @@ with requests, simulating how a real website would function when an item is purc
 
  To use this project, make sure all relative packages are installed with npm i. Once installed, make sure you seed the tables with npm run seed. Next, launch the server by running the server file. Next, navigate to insomnia and follow the paths that are set up in the file. Sending any request, GET, PUT, POST, and DELETE will be sent to the server and the desired output will be delivered.
 
-link to demo: https://drive.google.com/file/d/19bDnMlUubmXzRx03LFqCowq8dDnfYFDa/view
+link to demo: https://drive.google.com/file/d/1a1M-AY8ztQM5vqKb8WQoKPe0pfgWGLdT/view
 
 ![Image of server launching](./Assets/images/serverLaunch.png)
 ![Image of all categories](./Assets/images/allCategories.png)

@@ -131,16 +131,16 @@ router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
 
   try {
-    const delTag = await Tag.destroy({
+    const delProduct = await Product.destroy({
       where: {id: req.params.id}
     });
 
-    if (!delTag) {
+    if (!delProduct) {
       res.json("There was an issue in deleting the tag");
-      return
+      return;
     }
 
-    res.json(delTag)
+    res.json(delProduct);
   } catch (err) {
     res.json(err);
   }
