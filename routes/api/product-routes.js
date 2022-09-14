@@ -82,6 +82,9 @@ router.post('/', (req, res) => {
 });
 
 // update product
+
+
+// not ready
 router.put('/:id', (req, res) => {
   // update product data
   Product.update(req.body, {
@@ -96,7 +99,7 @@ router.put('/:id', (req, res) => {
     .then((productTags) => {
       // get list of current tag_ids
       const productTagIds = productTags.map(({ tag_id }) => tag_id);
-      // create filtered list of new tag_ids
+      // create filtered list of new tag_idsx
       const newProductTags = req.body.tagIds
         .filter((tag_id) => !productTagIds.includes(tag_id))
         .map((tag_id) => {
@@ -122,6 +125,7 @@ router.put('/:id', (req, res) => {
       res.status(400).json(err);
     });
 });
+
 
 router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
